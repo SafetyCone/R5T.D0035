@@ -32,10 +32,17 @@ namespace R5T.D0035.Default
             {
                 var messaging = this.MessageSink.AddAsync(Message.NewOutput(DateTime.UtcNow, $"{localRepositoryDirectoryPath}"));
 
-                var hasRemoteChangesNotInLocal = await this.SourceControlOperator.HasRemoteChangesNotInLocal(localRepositoryDirectoryPath); // Sequentially asynchronous.
-                if(hasRemoteChangesNotInLocal)
+                try
                 {
-                    output.LocalRepositoryDirectoryPaths.Add(localRepositoryDirectoryPath);
+                    var hasRemoteChangesNotInLocal = await this.SourceControlOperator.HasRemoteChangesNotInLocal(localRepositoryDirectoryPath); // Sequentially asynchronous.
+                    if (hasRemoteChangesNotInLocal)
+                    {
+                        output.LocalRepositoryDirectoryPaths.Add(localRepositoryDirectoryPath);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
                 }
 
                 await messaging;

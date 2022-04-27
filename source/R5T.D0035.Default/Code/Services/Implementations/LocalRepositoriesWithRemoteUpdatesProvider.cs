@@ -1,16 +1,16 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using R5T.D0010;
 using R5T.D0036;
 using R5T.T0001;
-using R5T.T0010;
+using R5T.T0010;using R5T.T0064;
 
 
 namespace R5T.D0035.Default
-{
-    public class LocalRepositoriesWithRemoteUpdatesProvider : ILocalRepositoriesWithRemoteUpdatesProvider
+{[ServiceImplementationMarker]
+    public class LocalRepositoriesWithRemoteUpdatesProvider : ILocalRepositoriesWithRemoteUpdatesProvider,IServiceImplementation
     {
         private IMessageSink MessageSink { get; }
         private ISourceControlOperator SourceControlOperator { get; }
